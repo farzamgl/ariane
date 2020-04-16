@@ -258,7 +258,7 @@ done_processing:
   std::unique_ptr<VerilatedVcdC> tfp(new VerilatedVcdC(vcdfd.get()));
   if (vcdfile) {
     top->trace(tfp.get(), 99);  // Trace 99 levels of hierarchy
-    tfp->open("");
+    tfp->open("dump.vcd");
   }
 #endif
 
