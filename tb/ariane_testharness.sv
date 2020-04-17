@@ -392,12 +392,12 @@ module ariane_testharness #(
     assign master[ariane_soc::DRAM].b_user = dram.b_user;
 
 
-    axi2mem #(
+    axi2dram #(
         .AXI_ID_WIDTH   ( AXI_ID_WIDTH_SLAVES ),
         .AXI_ADDR_WIDTH ( AXI_ADDRESS_WIDTH   ),
         .AXI_DATA_WIDTH ( AXI_DATA_WIDTH      ),
         .AXI_USER_WIDTH ( AXI_USER_WIDTH      )
-    ) i_axi2mem (
+    ) i_axi2dram (
         .clk_i  ( clk_i      ),
         .rst_ni ( ndmreset_n ),
         .slave  ( dram       ),
