@@ -495,14 +495,15 @@ module ariane_testharness #(
   assign b_chan_i.resp = dram_delayed.b_resp;
   assign dram.b_user = '0;
 
-  axi2mem #(
+  axi2dram #(
     .AXI_ID_WIDTH   ( ariane_soc::IdWidthSlave ),
     .AXI_ADDR_WIDTH ( AXI_ADDRESS_WIDTH        ),
     .AXI_DATA_WIDTH ( AXI_DATA_WIDTH           ),
     .AXI_USER_WIDTH ( AXI_USER_WIDTH           )
-  ) i_axi2mem (
+  ) i_axi2dram (
     .clk_i  ( clk_i        ),
     .rst_ni ( ndmreset_n   ),
+    .debug_i( i_ariane.debug_mode ),
     .slave  ( dram_delayed ),
     .req_o  ( req          ),
     .we_o   ( we           ),
