@@ -72,6 +72,7 @@ src/util/axi_slave_connect.sv
 src/util/axi_slave_connect_rev.sv
 src/fpga-support/rtl/SyncSpRamBeNx64.sv
 src/axi_mem_if/src/axi2mem.sv
+src/axi2dram.sv
 src/tech_cells_generic/src/cluster_clock_inverter.sv
 src/tech_cells_generic/src/pulp_clock_mux2.sv
 src/axi_adapter.sv
