@@ -312,12 +312,13 @@ verilate_command := $(verilator)                                                
                     -Wno-style                                                             \
                     -Wno-lint                                                              \
                     $(if $(DEBUG),--trace-structs --trace,)                                \
-                    -LDFLAGS "-L$(RISCV)/lib -Wl,-rpath,$(RISCV)/lib -lfesvr"              \
+                    -LDFLAGS "-L$(RISCV)/lib -Wl,-rpath,$(RISCV)/lib -ldramsim -lfesvr"    \
                     -CFLAGS "$(CFLAGS)" -Wall --cc  --vpi                                  \
                     $(list_incdir) --top-module ariane_testharness                         \
                     --Mdir $(ver-library) -O3                                              \
                     --exe tb/ariane_tb.cpp tb/dpi/SimDTM.cc tb/dpi/SimJTAG.cc              \
-                          tb/dpi/remote_bitbang.cc tb/dpi/msim_helper.cc
+                          tb/dpi/remote_bitbang.cc tb/dpi/msim_helper.cc                   \
+                          tb/dpi/dramsim2_wrapper.cc
 
 # User Verilator, at some point in the future this will be auto-generated
 verilate:
