@@ -73,6 +73,7 @@ src/util/axi_slave_connect_rev.sv
 src/fpga-support/rtl/SyncSpRamBeNx64.sv
 src/axi_mem_if/src/axi2mem.sv
 src/axi2dram.sv
+src/mem_storage_sync.sv
 src/tech_cells_generic/src/pulp_clock_gating.sv
 src/tech_cells_generic/src/cluster_clock_inverter.sv
 src/tech_cells_generic/src/pulp_clock_mux2.sv
@@ -150,4 +151,4 @@ fpga/src/axi_slice/src/axi_single_slice.sv
 fpga/src/axi_slice/src/axi_ar_buffer.sv
 fpga/src/axi_slice/src/axi_r_buffer.sv
 fpga/src/axi_slice/src/axi_aw_buffer.sv
-
+src/ariane_nonsynth_host.sv
