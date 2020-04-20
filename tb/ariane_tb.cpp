@@ -279,7 +279,7 @@ done_processing:
   }
   top->rst_ni = 1;
 
-  while (!dtm->done() && !jtag->done()) {
+  while (!Verilated::gotFinish()) {
     top->clk_i = 0;
     top->eval();
 #if VM_TRACE
