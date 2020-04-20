@@ -370,7 +370,7 @@ verilate_command := $(verilator)                                                
                     --Mdir $(ver-library) -O3                                                                    \
                     --exe tb/ariane_tb.cpp tb/dpi/SimDTM.cc tb/dpi/SimJTAG.cc                                    \
 					tb/dpi/remote_bitbang.cc tb/dpi/msim_helper.cc                           \
-                                        tb/dpi/dramsim2_wrapper.cc
+                                        tb/dpi/dramsim2_wrapper.cc tb/dpi/mem_utils.cc
 
 # User Verilator, at some point in the future this will be auto-generated
 verilate:

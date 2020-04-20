@@ -17,7 +17,7 @@ module ariane_testharness #(
   parameter int unsigned AXI_USER_WIDTH    = 1,
   parameter int unsigned AXI_ADDRESS_WIDTH = 64,
   parameter int unsigned AXI_DATA_WIDTH    = 64,
-  parameter bit          InclSimDTM        = 1'b1,
+  parameter bit          InclSimDTM        = 1'b0,
   parameter int unsigned NUM_WORDS         = 2**25,         // memory size
   parameter bit          StallRandomOutput = 1'b0,
   parameter bit          StallRandomInput  = 1'b0
@@ -513,6 +513,7 @@ module ariane_testharness #(
     .data_i ( rdata        )
   );
 
+/*
   sram #(
     .DATA_WIDTH ( AXI_DATA_WIDTH ),
     .NUM_WORDS  ( NUM_WORDS      )
@@ -525,6 +526,24 @@ module ariane_testharness #(
     .wdata_i    ( wdata                                                                       ),
     .be_i       ( be                                                                          ),
     .rdata_o    ( rdata                                                                       )
+  );
+*/
+
+  mem_storage_sync #(
+    .data_width_p (AXI_DATA_WIDTH),
+    .addr_width_p ($clog2(NUM_WORDS)),
+    .mem_cap_in_bytes_p (2**28),
+    .mem_file_p("prog.mem"),
+    .mem_offset_p(32'h8000_0000)
+  ) i_mem (
+    .clk_i (clk_i),
+    .reset_i (rst_ni),
+    .v_i(req),
+    .w_i(we),
+    .addr_i(addr[0+:$clog2(NUM_WORDS)]),
+    .data_i(wdata),
+    .write_mask_i(be),
+    .data_o(rdata)
   );
 
   // ---------------
@@ -677,6 +696,15 @@ module ariane_testharness #(
 `endif
     .axi_req_o            ( axi_ariane_req      ),
     .axi_resp_i           ( axi_ariane_resp     )
+  );
+
+  ariane_nonsynth_host #(
+  ) i_host (
+    .clk_i(clk_i),
+    .ex_i(i_ariane.ex_commit.valid),
+    .cause_i(i_ariane.ex_commit.cause),
+    .cycle_i(i_ariane.csr_regfile_i.cycle_q),
+    .instret_i(i_ariane.csr_regfile_i.instret_q)
   );
 
   axi_master_connect i_axi_master_connect_ariane (
