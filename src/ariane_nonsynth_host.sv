@@ -12,7 +12,7 @@ module ariane_nonsynth_host #(
 
   localparam CAUSE_USER_ECALL       = 64'h8;
   localparam CAUSE_SUPERVISOR_ECALL = 64'h9;
-  localparam CAUSE_MACHINE_ECALL    = 64'ha;
+  localparam CAUSE_MACHINE_ECALL    = 64'hb;
 
   wire is_ecall = (cause_i == CAUSE_USER_ECALL)
                   | (cause_i == CAUSE_SUPERVISOR_ECALL)
