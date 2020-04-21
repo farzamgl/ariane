@@ -21,7 +21,7 @@ verilator      ?= verilator
 # traget option
 target-options ?=
 # additional definess
-defines        ?= WT_DCACHE
+defines        ?=
 # test name for torture runs (binary name)
 test-location  ?= output/test
 # set to either nothing or -log
