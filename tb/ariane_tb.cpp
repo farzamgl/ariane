@@ -233,23 +233,25 @@ int main(int argc, char **argv) {
   }
 
 done_processing:
+/*
   if (optind == argc) {
     std::cerr << "No binary specified for emulator\n";
     usage(argv[0]);
     return 1;
   }
+
   int htif_argc = 1 + argc - optind;
   htif_argv = (char **) malloc((htif_argc) * sizeof (char *));
   htif_argv[0] = argv[0];
   for (int i = 1; optind < argc;) htif_argv[i++] = argv[optind++];
-
+*/
   const char *vcd_file = NULL;
   Verilated::commandArgs(argc, argv);
-
+/*
   jtag = new remote_bitbang_t(rbb_port);
   dtm = new dtm_t(htif_argc, htif_argv);
   signal(SIGTERM, handle_sigterm);
-
+*/
   std::unique_ptr<Variane_testharness> top(new Variane_testharness);
 
 #if VM_TRACE
@@ -307,7 +309,7 @@ done_processing:
   if (vcdfile)
     fclose(vcdfile);
 #endif
-
+/*
   if (dtm->exit_code()) {
     fprintf(stderr, "%s *** FAILED *** (code = %d) after %ld cycles\n", htif_argv[1], dtm->exit_code(), main_time);
     ret = dtm->exit_code();
@@ -320,7 +322,7 @@ done_processing:
 
   if (dtm) delete dtm;
   if (jtag) delete jtag;
-
+*/
   std::clock_t c_end = std::clock();
   auto t_end = std::chrono::high_resolution_clock::now();
 
