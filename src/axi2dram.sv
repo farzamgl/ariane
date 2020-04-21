@@ -18,7 +18,7 @@ module axi2dram #(
     input  logic [AXI_DATA_WIDTH-1:0]   data_i
 );
 
-    localparam dram_clock_period_in_ps_p = 10;
+    localparam dram_clock_period_in_ps_p = 1000;
     localparam dram_cfg_p = "dram_ch.ini";
     localparam dram_sys_cfg_p = "dram_sys.ini";
     localparam dram_capacity_p = 16384;
