@@ -435,7 +435,7 @@ module ariane_testharness #(
     .reset_i (rst_ni),
     .v_i(req),
     .w_i(we),
-    .addr_i(addr[0+:$clog2(NUM_WORDS)]),
+    .addr_i({addr[$clog2(AXI_DATA_WIDTH/8)+:$clog2(NUM_WORDS)], ($clog2(AXI_DATA_WIDTH/8))'(0)}),
     .data_i(wdata),
     .write_mask_i(be),
     .data_o(rdata)
