@@ -7,7 +7,6 @@ module axi2dram #(
 )(
     input logic                         clk_i,    // Clock
     input logic                         rst_ni,  // Asynchronous reset active low
-    input logic                         debug_i,
     AXI_BUS.Slave                       slave,
 
     output logic                        req_o,
@@ -114,34 +113,12 @@ module axi2dram #(
                 if(slave.ar_valid) begin
                     write_d     = 0;
                     ax_req_d    = {slave.ar_id, slave.ar_addr, slave.ar_len, slave.ar_size, slave.ar_burst};
-                    if(debug_i) begin
-                        slave.ar_ready = 1;
-                        req_o   = 1;
-                        addr_o  = slave.ar_addr;
-                        cnt_d   = 1;
-                        state_d = READ;
-                    end
-                    else
-                        state_d     = WAIT_ACCEPT;
+                    state_d     = WAIT_ACCEPT;
                 end
                 else if(slave.aw_valid) begin
                     write_d     = 1;
                     ax_req_d    = {slave.aw_id, slave.aw_addr, slave.aw_len, slave.aw_size, slave.aw_burst};
-                    if(debug_i) begin
-                        slave.aw_ready  = 1;
-                        slave.w_ready   = 1;
-                        addr_o  = slave.aw_addr;
-                        if(slave.w_valid) begin
-                            req_o   = 1;
-                            we_o    = 1;
-                            cnt_d   = 1;
-                            state_d = (slave.w_last) ? SEND_B : WRITE;
-                        end
-                        else
-                          state_d = WAIT_WVALID;
-                    end
-                    else
-                        state_d     = WAIT_ACCEPT;
+                    state_d     = WAIT_ACCEPT;
                 end
             end
             WAIT_ACCEPT: begin

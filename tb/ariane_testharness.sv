@@ -503,7 +503,6 @@ module ariane_testharness #(
   ) i_axi2dram (
     .clk_i  ( clk_i        ),
     .rst_ni ( ndmreset_n   ),
-    .debug_i( i_ariane.debug_mode ),
     .slave  ( dram_delayed ),
     .req_o  ( req          ),
     .we_o   ( we           ),
