@@ -316,7 +316,7 @@ module axi2dram #(
     initial
         init(dram_clock_period_in_ps_p, dram_cfg_p, dram_sys_cfg_p, dram_capacity_p);
 
-    always_ff @(negedge clk_i) begin
+    always_ff @(posedge clk_i) begin
         if (state_q == WAIT_ACCEPT && ~write_q)
             dramsim_accepted <= mem_read_req(addr_o);
         else if (state_q == WAIT_ACCEPT && write_q)
